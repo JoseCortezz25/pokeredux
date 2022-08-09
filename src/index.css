@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Roboto:wght@300;400&display=swap');
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --background-gray-color: #F3F6FC;
+  --dark-gray-color: #82909F;
+  --white-color: #FFFFFF;
+}
+
+body {
+  background-color: var(--background-gray-color);
+  font-family: 'Roboto', sans-serif;
+
+}
