@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Footer from "../Footer/Footer";
+import PokemonDetails from "../PokemonDetails/PokemonDetails";
+import { Routes, Route } from "react-router-dom";
+
 import "./Layout.css";
 
 const Layout = () => {
@@ -9,7 +12,10 @@ const Layout = () => {
     <main className="App">
       <Header />
       <div className="Container">
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pokemon/:name" element={<PokemonDetails />} />
+        </Routes>
       </div>
       <Footer />
     </main>

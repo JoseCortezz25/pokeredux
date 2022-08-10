@@ -1,10 +1,10 @@
 .PokemonCard {
   background-color: var(--white-color);
   width: 100%;
-  max-height: 170px;
+  max-height: 190px;
 
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-  border-radius: 15px;
+  border-radius: 30px;
 }
 
 .PokemonCard__image {
@@ -52,15 +52,27 @@
 }
 
 .TypeGrass {
-  background-color: #1dd1a1;
+  background-color: #d3eee5;
+}
+
+.TypeGrass .PokemonCard__description li {
+  background-color: #96cfbc;
 }
 
 .TypeFire {
-  background-color: #ff6b6b;
+  background-color: #fead68;
+}
+
+.TypeFire .PokemonCard__description li {
+  background-color: #f66c45;
 }
 
 .TypeWater {
-  background-color: #54a0ff;
+  background-color: #b4e0fc;
+}
+
+.TypeWater .PokemonCard__description li {
+  background-color: #8EBDED;
 }
 
 .TypeNormal {
@@ -72,7 +84,7 @@
 }
 
 .TypeFighting {
-  background-color: #D35400;
+  background-color: #d35400;
 }
 
 .TypePoison {
@@ -80,15 +92,19 @@
 }
 
 .TypeElectric {
-  background-color: #feca57;
+  background-color: #fff0a5;
+}
+
+.TypeElectric .PokemonCard__description li {
+  background-color: #fcd16d;
 }
 
 .TypeGround {
-  background-color: #825A2C;
+  background-color: #825a2c;
 }
 
 .TypeRock {
-  background-color: #3E2723;
+  background-color: #3e2723;
 }
 
 .TypePsychic {
@@ -96,29 +112,51 @@
 }
 
 .TypeIce {
-  background-color: #67E8F9;
+  background-color: #67e8f9;
 }
 
 .TypeBug {
-  background-color: #14532D;
+  background-color: #14532d;
 }
 
 .TypeGhost {
-  background-color: #4C1D95;
+  background-color: #4c1d95;
 }
 
 .TypeSteel {
-  background-color: #115E59;
+  background-color: #115e59;
 }
 
 .TypeDragon {
-  background-color: #0891B2;
+  background-color: #0891b2;
 }
 
 .TypeFairy {
-  background-color: #9D174D;
+  background-color: #9d174d;
 }
 
 .TypeDark {
-  background-color: #18181B;
+  background-color: #18181b;
+}
+
+.TypeGrass .PokemonCard__description li,
+.TypePoison .PokemonCard__description li,
+.TypeBug .PokemonCard__description li,
+.TypeDark .PokemonCard__description li,
+.TypeDragon .PokemonCard__description li,
+.TypeElectric .PokemonCard__description li,
+.TypeFairy .PokemonCard__description li,
+.TypeFighting .PokemonCard__description li,
+.TypeFire .PokemonCard__description li,
+.TypeFlying .PokemonCard__description li,
+.TypeGhost .PokemonCard__description li,
+.TypeGrass .PokemonCard__description li,
+.TypeGround .PokemonCard__description li,
+.TypeIce .PokemonCard__description li,
+.TypeNormal .PokemonCard__description li,
+.TypePsychic .PokemonCard__description li,
+.TypeRock .PokemonCard__description li,
+.TypeSteel .PokemonCard__description li,
+.TypeWater .PokemonCard__description li {
+  color: #fff;
 }

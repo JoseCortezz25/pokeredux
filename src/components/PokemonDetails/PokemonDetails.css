@@ -1,0 +1,18 @@
+.PokemonDetails {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.PokemonDetails__images {
+  width: 30%;
+  border: 1px solid green;
+}
+
+.PokemonDetails__content {
+  width: 70%;
+  border: 1px solid red;
+}
