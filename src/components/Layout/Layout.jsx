@@ -1,17 +1,19 @@
-import React from 'react'
-import Header from '../Header/Header'
-import Home from '../Home/Home'
-import Footer from '../Footer/Footer'
-import './Layout.css'
+import React from "react";
+import Header from "../Header/Header";
+import Home from "../Home/Home";
+import Footer from "../Footer/Footer";
+import "./Layout.css";
 
 const Layout = () => {
   return (
-    <main className='App'>
+    <main className="App">
       <Header />
-      <Home />
+      <div className="Container">
+        <Home />
+      </div>
       <Footer />
     </main>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

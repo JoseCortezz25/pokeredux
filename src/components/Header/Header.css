@@ -5,7 +5,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 3rem;
-  border-end-end-radius: 0.8rem;
-  border-end-start-radius: 0.8rem;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 4px 100px 0px;
+  margin-bottom: 2rem;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }

@@ -1,4 +1,13 @@
 .App {
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container {
+  width: 70%;
+  display: flex;
 }

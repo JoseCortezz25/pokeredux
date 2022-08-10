@@ -1,11 +1,44 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { getPokemon } from "../../service/fetchData";
+import "./PokemonCard.css";
 
-const PokemonCard = ({pokemon: { name }}) => {
-  return (
-    <div>
-      <h3>{name}</h3>
+const PokemonCard = ({ name }) => {
+  const [pokemon, setPokemon] = useState({});
+  const [typesPokemon, setTypesPokemon] = useState([]);
+
+  useEffect(() => {
+    getPokemon(name)
+      .then((data) => {
+        setPokemon(data);
+        setTypesPokemon(data.types[0].type.name);
+      })
+      .catch((err) => console.log("getPokemon err", err));
+  }, []);
+
+const typeOfPokemons = ['normal', 'fire', 'water', 'grass', 'flying', 'fighting', 'poison', 'electric', 'ground', 'rock', 'psychic', 'ice', 'bug', 'ghost', 'steel', 'dragon', 'fairy', 'dark'];
+
+  const detectTypePokemon = (type) => {
+    if (typeOfPokemons.includes(type)) {
+      return `PokemonCard Type${type[0].toUpperCase() + type.slice(1)}`;
+    }
+    return "PokemonCard";
+  }
+
+  return pokemon ? (
+    <div className={`${detectTypePokemon(typesPokemon)}`}>
+      <div className="PokemonCard__image">
+        <img src={pokemon.sprites?.front_default} alt="" />
+      </div>
+      <h3 className="PokemonCard__name">{name}</h3>
+      <ul className="PokemonCard__description">
+        {pokemon.types?.map((type) => (
+          <li key={type?.type.name}>{type?.type.name}</li>
+        ))}
+      </ul>
     </div>
-  )
-}
+  ) : (
+    <p>loading</p>
+  );
+};
 
-export default PokemonCard
+export default PokemonCard;
