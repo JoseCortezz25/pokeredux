@@ -6,7 +6,7 @@ const Search = ({setSearch}) => {
     <div className="Search">
       <input
         type="text"
-        placeholder="Searching..."
+        placeholder="Search your Pokemon..."
         onChange={({ target }) => setSearch(target.value)}
       />
     </div>

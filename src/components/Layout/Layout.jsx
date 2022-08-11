@@ -15,6 +15,7 @@ const Layout = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pokemon/:name" element={<PokemonDetails />} />
+          <Route path="/page/:page" element={<Home />} />
         </Routes>
       </div>
       <Footer />

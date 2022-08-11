@@ -2,9 +2,28 @@ import axios from 'axios';
 
 const API = 'https://pokeapi.co/api/v2';
 
-export const getAllPokemons = (limit = 50) => {
-  return axios.get(`${API}/pokemon?limit=${limit}?`)
-    .then(response => response.data.results)
+export const getAllPokemons = (limit = 25) => {
+  return axios.get(`${API}/pokemon?limit=${limit}`)
+    .then(response => {
+      console.log(response.data.next);
+      return {
+        results: response.data.results,
+        next: response.data.next
+      };
+    })
+    .catch(error => console.log(error));
+}
+
+export const getPokemonByPage = (path) => {
+  return axios.get(path)
+    .then(response => {
+      console.log(response.data.next);
+      return {
+        results: response.data.results,
+        previous: response.data.previous || null,
+        next: response.data.next
+      };
+    })
     .catch(error => console.log(error));
 }
 

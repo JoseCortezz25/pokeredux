@@ -22,3 +22,139 @@ a {
   text-decoration: none;
   color: black;
 }
+
+
+.TypeGrass {
+  background-color: #d3eee5;
+}
+
+.TypeGrass .PokemonCard__description li {
+  background-color: #96cfbc;
+}
+
+.TypeFire {
+  background-color: #fead68;
+}
+
+.TypeFire .PokemonCard__description li {
+  background-color: #f66c45;
+}
+
+.TypeWater {
+  background-color: #b4e0fc;
+}
+
+.TypeWater .PokemonCard__description li {
+  background-color: #8EBDED;
+}
+
+.TypeNormal {
+  background-color: rgba(61, 61, 61, 0.89);
+}
+
+.TypeNormal .PokemonCard__description li {
+  background-color: #272727;
+}
+
+.TypeFlying {
+  background-color: #227093;
+}
+
+.TypeFighting {
+  background-color: #d35400;
+}
+
+.TypePoison {
+  background-color: rgba(44, 44, 84, .75);
+}
+
+.TypePoison .PokemonCard__description li {
+  background-color: #2c2c54;
+}
+
+.TypeElectric {
+  background-color: #fff0a5;
+}
+
+.TypeElectric .PokemonCard__description li {
+  background-color: #fcd16d;
+}
+
+.TypeGround {
+  background-color: rgba(130, 90, 44, .8);
+}
+
+.TypeGround .PokemonCard__description li {
+  background-color: #825a2c;
+}
+
+
+.TypeRock {
+  background-color: rgba(62, 39, 35, .6);
+}
+
+.TypeRock .PokemonCard__description li {
+  background-color: #3e2723;
+}
+
+.TypePsychic {
+  background-color: #f85888;
+}
+
+.TypeIce {
+  background-color: #67e8f9;
+}
+
+.TypeBug {
+  background-color: rgba(20, 83, 45,.76);
+}
+
+.TypeBug .PokemonCard__description li {
+  background-color: #14532d;
+}
+
+.TypeGhost {
+  background-color: #4c1d95;
+}
+
+.TypeSteel {
+  background-color: #115e59;
+}
+
+.TypeDragon {
+  background-color: #0891b2;
+}
+
+.TypeFairy {
+  background-color: rgba(157, 23, 77,.7);
+}
+
+.TypeFairy .PokemonCard__description li {
+  background-color: #7c0c2d;
+}
+
+.TypeDark {
+  background-color: #18181b;
+}
+
+.TypeGrass .PokemonCard__description li,
+.TypePoison .PokemonCard__description li,
+.TypeBug .PokemonCard__description li,
+.TypeDark .PokemonCard__description li,
+.TypeDragon .PokemonCard__description li,
+.TypeElectric .PokemonCard__description li,
+.TypeFairy .PokemonCard__description li,
+.TypeFighting .PokemonCard__description li,
+.TypeFire .PokemonCard__description li,
+.TypeFlying .PokemonCard__description li,
+.TypeGhost .PokemonCard__description li,
+.TypeGrass .PokemonCard__description li,
+.TypeGround .PokemonCard__description li,
+.TypeIce .PokemonCard__description li,
+.TypeNormal .PokemonCard__description li,
+.TypePsychic .PokemonCard__description li,
+.TypeRock .PokemonCard__description li,
+.TypeSteel .PokemonCard__description li,
+.TypeWater .PokemonCard__description li {
+  color: #fff;
+}

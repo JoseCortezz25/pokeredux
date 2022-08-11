@@ -1,14 +1,16 @@
 .Search {
-  width: 100%;
+  width: 50%;
 }
 
 .Search input[type="text"] {
   width: 100%;
-  padding: 12px 20px;
+  padding: 14px 20px;
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
   background-color: #fff;
   margin-bottom: 2rem;
+  border-top-left-radius:  11px;
+  border-top-right-radius: 11px;
 }
