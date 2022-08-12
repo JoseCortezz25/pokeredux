@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { getPokemonByPage, getLocationAreas, getAllTypesPokemon } from "../../service/fetchData";
+import {
+  getPokemonByPage,
+  getLocationAreas,
+  getAllTypesPokemon,
+} from "../../service/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setPokemons } from "../../actions";
 import Pagination from "../Pagination/Pagination";
@@ -9,7 +13,8 @@ import "./Home.css";
 
 const Home = () => {
   const pokemons = useSelector((state) => state.pokemons);
-  const dispatch = useDispatch(); 
+  const pokemonsDetails = useSelector((state) => state.pokemonsDetails);
+  const dispatch = useDispatch();
 
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
@@ -19,7 +24,6 @@ const Home = () => {
     "https://pokeapi.co/api/v2/pokemon"
   );
   const [typeOfPokemons, setTypeOfPokemons] = useState([]);
-
 
   const searchPokemon = (search) => {
     const filteredPokemons = pokemons.filter((pokemon) => {
@@ -42,8 +46,23 @@ const Home = () => {
   const filterByLocation = (event) => {
     console.log("value", event);
   };
+
   const filterBySpecie = (event) => {
-    console.log("value", event);
+    if (event.target.value === "all") return setPokemonSearched(pokemons);
+
+    const filteredPokemons = pokemonsDetails.filter((pokemon) =>
+      pokemon.types.some(
+        (type) => type.type.name === event.nativeEvent.target.value
+      )
+    );
+
+    const matchBetweenPokemonsAndFiltered = pokemons.filter((pokemon) => {
+      return filteredPokemons.some((filteredPokemon) => {
+        return filteredPokemon.name === pokemon.name;
+      });
+    });
+
+    setPokemonSearched(matchBetweenPokemonsAndFiltered);
   };
 
   useEffect(() => {
@@ -67,7 +86,7 @@ const Home = () => {
 
     getAllTypesPokemon()
       .then((data) => {
-        setTypeOfPokemons(data.map(specie => specie.name));
+        setTypeOfPokemons(data.map((specie) => specie.name));
       })
       .catch((err) => console.log("getAllTypesPokemon err", err));
   }, [currentPageUrl]);
@@ -79,6 +98,7 @@ const Home = () => {
         <div>
           <form onSubmit={filterByLocation}>
             <select>
+              <option disabled>Choose an option</option>
               {locations?.map((location) => (
                 <option value={location}>
                   {location.replaceAll("-", " ")}
@@ -88,11 +108,11 @@ const Home = () => {
           </form>
 
           <form onSubmit={filterBySpecie}>
-            <select>
+            <select onChange={filterBySpecie}>
+              <option disabled>Choose an Specie</option>
+              <option value="all">💂 All species</option>
               {typeOfPokemons?.map((specie) => (
-                <option value={specie}>
-                  {specie.replaceAll("-", " ")}
-                </option>
+                <option value={specie}>{specie.replaceAll("-", " ")}</option>
               ))}
             </select>
           </form>

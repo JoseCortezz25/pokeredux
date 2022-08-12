@@ -4,9 +4,7 @@
 }
 
 .Home__filters {
-  border: 1px solid red;
   width: 100%;
-  /* margin: 0 auto; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,14 +16,11 @@
 }
 
 .Home__filters button {
-  /* width: 100%; */
   padding: 14px 20px;
-  /* margin: 8px 0; */
   box-sizing: border-box;
   border: 2px solid #fff;
   border-radius: 10px;
   background-color: #fff;
-  /* margin-bottom: 2rem; */
   font-weight: bold;
   font-size: 15px;
   text-transform: uppercase;
@@ -35,10 +30,10 @@
 .Home__filters select {
   background-color: #fff;
   border-radius: 15px;
-  /* height: 45px; */
   border: 0;
   padding: 14px 20px;
   max-height: 45px;
+  margin-left: 10px;
 }
 
 .Home__filters button:not(:first-child) {
