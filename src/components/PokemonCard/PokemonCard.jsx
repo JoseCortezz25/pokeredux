@@ -1,42 +1,33 @@
 import { useEffect, useState } from "react";
-import { getPokemon } from "../../service/fetchData";
+import { getAllTypesPokemon, getPokemon } from "../../service/fetchData";
 import { Link } from "react-router-dom";
+import { setPokemonsDetails } from "../../actions";
 
 import "./PokemonCard.css";
+import { useDispatch } from "react-redux";
 
 const PokemonCard = ({ name }) => {
+  const dispatch = useDispatch();
   const [pokemon, setPokemon] = useState({});
   const [typesPokemon, setTypesPokemon] = useState([]);
+  const [typeOfPokemons, setTypeOfPokemons] = useState([]);
 
   useEffect(() => {
     getPokemon(name)
       .then((data) => {
         setPokemon(data);
+        dispatch(setPokemonsDetails(data));
         setTypesPokemon(data.types[0].type.name);
       })
       .catch((err) => console.log("getPokemon err", err));
-  }, []);
 
-  const typeOfPokemons = [
-    "normal",
-    "fire",
-    "water",
-    "grass",
-    "flying",
-    "fighting",
-    "poison",
-    "electric",
-    "ground",
-    "rock",
-    "psychic",
-    "ice",
-    "bug",
-    "ghost",
-    "steel",
-    "dragon",
-    "fairy",
-    "dark",
-  ];
+    getAllTypesPokemon()
+      .then((data) => {
+        setTypeOfPokemons(data.map(specie => specie.name));
+      })
+      .catch((err) => console.log("getAllTypesPokemon err", err));
+
+  }, [name]);
 
   const detectTypePokemon = (type) => {
     if (typeOfPokemons.includes(type)) {

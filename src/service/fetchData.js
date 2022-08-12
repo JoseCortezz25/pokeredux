@@ -32,3 +32,15 @@ export const getPokemon = (name) => {
     .then(response => response.data)
     .catch(error => console.log(error));
 }
+
+export const getLocationAreas = () => {
+  return axios.get(`${API}/location-area`)
+    .then(response => response.data.results)
+    .catch(error => console.log(error));
+}
+
+export const getAllTypesPokemon = () => {
+  return axios.get(`${API}/type`)
+    .then(response => response.data.results)
+    .catch(error => console.log(error));
+}
