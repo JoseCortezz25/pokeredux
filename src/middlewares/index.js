@@ -1,4 +1,4 @@
-const logger = (store) => (next) => (action) => {
+export const logger = (store) => (next) => (action) => {
   console.group('LOGGER')
   console.log('dispatching', action);
   const result = next(action);
