@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import {
-  getPokemonByPage,
   getLocationAreas,
   getAllTypesPokemon,
+  getAllPokemons,
+  getPokemonByUrl,
 } from "../../service/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setPokemons } from "../../actions";
@@ -20,9 +21,6 @@ const Home = () => {
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [locations, setLocations] = useState();
   const [pokemonSearched, setPokemonSearched] = useState(pokemons);
-  const [currentPageUrl, setCurrentPageUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
   const [typeOfPokemons, setTypeOfPokemons] = useState([]);
 
   const searchPokemon = (search) => {
@@ -50,7 +48,7 @@ const Home = () => {
   const filterBySpecie = (event) => {
     if (event.target.value === "all") return setPokemonSearched(pokemons);
 
-    const filteredPokemons = pokemonsDetails.filter((pokemon) =>
+    const filteredPokemons = pokemons.filter((pokemon) =>
       pokemon.types.some(
         (type) => type.type.name === event.nativeEvent.target.value
       )
@@ -66,17 +64,22 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getPokemonByPage(currentPageUrl)
-      .then((data) => {
-        console.log(data);
-        setNextPageUrl(data.next);
-        setPrevPageUrl(data.previous);
-        dispatch(setPokemons(data.results));
-        setPokemonSearched(data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchPokemons = async () => {
+      try {
+        const { results } = await getAllPokemons();
+        setNextPageUrl(results.next);
+        setPrevPageUrl(results.previous);
+        const pokemonDetailed = await Promise.all(
+          results.map((pokemon) => getPokemonByUrl(pokemon))
+        );
+        console.log("pokemonDetailed", pokemonDetailed);
+        dispatch(setPokemons(pokemonDetailed));
+        setPokemonSearched(pokemonDetailed);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPokemons();
 
     getLocationAreas()
       .then((data) => {
@@ -89,7 +92,7 @@ const Home = () => {
         setTypeOfPokemons(data.map((specie) => specie.name));
       })
       .catch((err) => console.log("getAllTypesPokemon err", err));
-  }, [currentPageUrl]);
+  }, []);
 
   return (
     <div className="Home">
@@ -120,11 +123,15 @@ const Home = () => {
           <button>🎟 Color</button>
         </div>
       </div>
-      <PokemonList pokemons={pokemonSearched} />
-      <Pagination
+      {pokemonSearched ? (
+        <PokemonList pokemons={pokemonSearched} />
+      ) : (
+        <p>loading</p>
+      )}
+      {/* <Pagination
         gotoNextPage={nextPageUrl ? gotoNextPage : null}
         gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-      />
+      /> */}
     </div>
   );
 };
