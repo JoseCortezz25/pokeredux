@@ -101,15 +101,14 @@ const Comparison = () => {
           <div className="SectionInfo">
             <p>
               <strong>Abilities: </strong>
-              {pokemon1.abilities
-                .map((ability) => ability.ability.name)
+              {pokemon1.abilities?.map((ability) => ability.ability?.name)
                 .join(", ")}
             </p>
           </div>
 
           <h2>Base Stats</h2>
           <div className="SectionInfo Stats">
-            {pokemon1?.stats.map((stat) => (
+            {pokemon1.stats?.map((stat) => (
               <p>
                 <strong>{stat.stat.name}: </strong>
                 {stat.effort} - {stat.base_stat} <br />
@@ -160,15 +159,14 @@ const Comparison = () => {
           <div className="SectionInfo">
             <p>
               <strong>Abilities: </strong>
-              {pokemon2.abilities
-                .map((ability) => ability.ability.name)
+              {pokemon2.abilities?.map((ability) => ability.ability?.name)
                 .join(", ")}
             </p>
           </div>
 
           <h2>Base Stats</h2>
           <div className="SectionInfo Stats">
-            {pokemon2.stats.map((stat) => (
+            {pokemon2.stats?.map((stat) => (
               <p>
                 <strong>{stat.stat.name}: </strong>
                 {stat.effort} - {stat.base_stat} <br />
