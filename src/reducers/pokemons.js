@@ -1,8 +1,9 @@
-import { SET_POKEMONS, SET_POKEMONS_WITH_DETAILS } from "../actions/types";
+import { SET_POKEMONS, SET_POKEMONS_WITH_DETAILS, SET_COMPARE_POKEMONS } from "../actions/types";
 
 const initialState = {
   pokemons: [],
-  pokemonsDetails: []
+  pokemonsDetails: [],
+  comparePokemons: [],
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ export const pokemonsReducer = (state = initialState, action) => {
         ...state,
         pokemonsDetails: [...state.pokemonsDetails, action.payload]
       };
+    case SET_COMPARE_POKEMONS:
+      return {
+        ...state,
+        comparePokemons: [...state.comparePokemons, action.payload]
+      }
     default:
       return state;
   }

@@ -1,0 +1,49 @@
+.Comparison {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.ComparisonPokemon h1 {
+  text-align: center;
+  font-family: "Mouse Memoirs", sans-serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.PokemonName {
+  text-align: center;
+}
+
+.ComparisonPokemon h2 {
+  font-family: "Mouse Memoirs", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+
+  margin-bottom: 20px;
+}
+
+
+.ComparisonPokemon__images {
+  width: 100%;
+}
+
+.ComparisonPokemon__species {
+  display: flex;
+  justify-content: center;
+}
+
+.ComparisonPokemon__species .TypesPokemon {
+  margin-top: 0rem;
+}
+.ComparisonPokemon__species .TypesPokemon li {
+  margin: 0rem;
+}
+
+
+.ComparisonPokemon__species .TypesPokemon li:not(:first-child) {
+  margin-left: 10px;
+}
