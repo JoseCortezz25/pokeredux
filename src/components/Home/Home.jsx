@@ -7,18 +7,14 @@ import {
 } from "../../service/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setPokemons } from "../../actions";
-import Pagination from "../Pagination/Pagination";
 import PokemonList from "../PokemonList/PokemonList";
 import Search from "../Search/Search";
 import "./Home.css";
 
 const Home = () => {
   const pokemons = useSelector((state) => state.pokemons);
-  const pokemonsDetails = useSelector((state) => state.pokemonsDetails);
   const dispatch = useDispatch();
 
-  const [nextPageUrl, setNextPageUrl] = useState();
-  const [prevPageUrl, setPrevPageUrl] = useState();
   const [locations, setLocations] = useState();
   const [pokemonSearched, setPokemonSearched] = useState(pokemons);
   const [typeOfPokemons, setTypeOfPokemons] = useState([]);
@@ -31,14 +27,6 @@ const Home = () => {
       setPokemonSearched(pokemons);
     }
     setPokemonSearched(filteredPokemons);
-  };
-
-  const gotoNextPage = () => {
-    setCurrentPageUrl(nextPageUrl);
-  };
-
-  const gotoPrevPage = () => {
-    setCurrentPageUrl(prevPageUrl);
   };
 
   const filterByLocation = (event) => {
@@ -67,8 +55,6 @@ const Home = () => {
     const fetchPokemons = async () => {
       try {
         const { results } = await getAllPokemons();
-        setNextPageUrl(results.next);
-        setPrevPageUrl(results.previous);
         const pokemonDetailed = await Promise.all(
           results.map((pokemon) => getPokemonByUrl(pokemon))
         );
@@ -128,10 +114,6 @@ const Home = () => {
       ) : (
         <p>loading</p>
       )}
-      {/* <Pagination
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-      /> */}
     </div>
   );
 };
