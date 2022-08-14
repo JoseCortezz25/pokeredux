@@ -1,5 +1,5 @@
 .Search {
-  width: 50%;
+  width: 40%;
 }
 
 .Search input[type="text"] {
@@ -8,9 +8,7 @@
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  border-bottom: 2px solid #ccc;
+  /* border-bottom: 2px solid #ccc; */
   background-color: #fff;
-  margin-bottom: 2rem;
-  border-top-left-radius:  11px;
-  border-top-right-radius: 11px;
+  border-radius: 10px;
 }

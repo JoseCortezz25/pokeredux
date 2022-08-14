@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
-import { getPokemonByPage } from "../../service/fetchData";
-import Pagination from "../Pagination/Pagination";
+import {
+  getLocationAreas,
+  getAllTypesPokemon,
+  getAllPokemons,
+  getPokemonByUrl,
+} from "../../service/fetchData";
+import { useDispatch, useSelector } from "react-redux";
+import { setPokemons } from "../../actions";
 import PokemonList from "../PokemonList/PokemonList";
 import Search from "../Search/Search";
 import "./Home.css";
 
 const Home = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [nextPageUrl, setNextPageUrl] = useState();
-  const [prevPageUrl, setPrevPageUrl] = useState();
+  const pokemons = useSelector((state) => state.pokemons);
+  const dispatch = useDispatch();
+
+  const [locations, setLocations] = useState();
   const [pokemonSearched, setPokemonSearched] = useState(pokemons);
-  const [currentPageUrl, setCurrentPageUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
+  const [typeOfPokemons, setTypeOfPokemons] = useState([]);
 
   const searchPokemon = (search) => {
     const filteredPokemons = pokemons.filter((pokemon) => {
@@ -24,43 +29,91 @@ const Home = () => {
     setPokemonSearched(filteredPokemons);
   };
 
-  function gotoNextPage() {
-    setCurrentPageUrl(nextPageUrl);
-  }
+  const filterByLocation = (event) => {
+    console.log("value", event);
+  };
 
-  function gotoPrevPage() {
-    setCurrentPageUrl(prevPageUrl);
-  }
+  const filterBySpecie = (event) => {
+    if (event.target.value === "all") return setPokemonSearched(pokemons);
+
+    const filteredPokemons = pokemons.filter((pokemon) =>
+      pokemon.types.some(
+        (type) => type.type.name === event.nativeEvent.target.value
+      )
+    );
+
+    const matchBetweenPokemonsAndFiltered = pokemons.filter((pokemon) => {
+      return filteredPokemons.some((filteredPokemon) => {
+        return filteredPokemon.name === pokemon.name;
+      });
+    });
+
+    setPokemonSearched(matchBetweenPokemonsAndFiltered);
+  };
 
   useEffect(() => {
-    getPokemonByPage(currentPageUrl)
+    const fetchPokemons = async () => {
+      try {
+        const { results } = await getAllPokemons();
+        const pokemonDetailed = await Promise.all(
+          results.map((pokemon) => getPokemonByUrl(pokemon))
+        );
+        console.log("pokemonDetailed", pokemonDetailed);
+        dispatch(setPokemons(pokemonDetailed));
+        setPokemonSearched(pokemonDetailed);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPokemons();
+
+    getLocationAreas()
       .then((data) => {
-        console.log(data);
-        setPokemons(data.results);
-        setNextPageUrl(data.next);
-        setPrevPageUrl(data.previous);
-        setPokemonSearched(data.results);
+        setLocations(data.map((location) => location.name));
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [currentPageUrl]);
+      .catch((error) => console.log(error));
+
+    getAllTypesPokemon()
+      .then((data) => {
+        setTypeOfPokemons(data.map((specie) => specie.name));
+      })
+      .catch((err) => console.log("getAllTypesPokemon err", err));
+  }, []);
 
   return (
     <div className="Home">
       <div className="Home__filters">
         <Search setSearch={searchPokemon} />
         <div>
-          <button>🚂 Location</button>
-          <button>🏷 Types</button>
-          <button>🎟 Species</button>
+          <form onSubmit={filterByLocation}>
+            <select>
+              <option disabled>Choose an option</option>
+              {locations?.map((location) => (
+                <option value={location}>
+                  {location.replaceAll("-", " ")}
+                </option>
+              ))}
+            </select>
+          </form>
+
+          <form onSubmit={filterBySpecie}>
+            <select onChange={filterBySpecie}>
+              <option disabled>Choose an Specie</option>
+              <option value="all">💂 All species</option>
+              {typeOfPokemons?.map((specie) => (
+                <option value={specie}>{specie.replaceAll("-", " ")}</option>
+              ))}
+            </select>
+          </form>
+
+          <button>🎟 Color</button>
         </div>
       </div>
-      <PokemonList pokemons={pokemonSearched} />
-      <Pagination
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-      />
+      {pokemonSearched ? (
+        <PokemonList pokemons={pokemonSearched} />
+      ) : (
+        <p>loading</p>
+      )}
     </div>
   );
 };

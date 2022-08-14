@@ -1,12 +1,9 @@
 .PokemonDetails {
   width: 80%;
-  /* height: 80vh; */
   margin: 0 auto;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   padding: 20px;
-  /* border: 1px solid green; */
 }
 
 .PokemonDetails__images {
@@ -20,7 +17,6 @@
 }
 
 .PokemonImage, .PokemonComplementaryImage {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,27 +29,12 @@
 
 .PokemonDetails__content {
   width: 60%;
-  /* border: 1px solid red; */
   padding-left: 1.1rem;
-  /* overflow-y: scroll; */
 }
 
 .SectionInfo.Stats strong {
   text-transform: capitalize;
 }
-
-/* .PokemonDetails__content::-webkit-scrollbar {
-  display: none;
-}
-
-.PokemonDetails__content:hover::-webkit-scrollbar {
-  display: none;
-}
-
-.PokemonDetails__content::-webkit-scrollbar-thumb {
-  display: none;
-}
- */
 
 .PokemonDetails__content h1 {
   font-family: "Mouse Memoirs", sans-serif;
@@ -84,7 +65,7 @@
 }
 
 .TypesPokemon {
-  width: 80%;
+  width: auto;
   display: flex;
   align-items: center;
   margin-top: 1rem;

@@ -1,66 +1,53 @@
 import { useEffect, useState } from "react";
-import { getPokemon } from "../../service/fetchData";
+import { getAllTypesPokemon } from "../../service/fetchData";
 import { Link } from "react-router-dom";
-
 import "./PokemonCard.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setComparePokemons } from "../../actions";
 
-const PokemonCard = ({ name }) => {
-  const [pokemon, setPokemon] = useState({});
-  const [typesPokemon, setTypesPokemon] = useState([]);
+const PokemonCard = ({ name, sprites, species }) => {
+  const [listTypesOfPokemons, setListTypesOfPokemons] = useState([]);
+  const comparePokemons = useSelector((state) => state.comparePokemons);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getPokemon(name)
+    getAllTypesPokemon()
       .then((data) => {
-        setPokemon(data);
-        setTypesPokemon(data.types[0].type.name);
+        setListTypesOfPokemons(data.map((specie) => specie.name));
       })
-      .catch((err) => console.log("getPokemon err", err));
+      .catch((err) => console.log("getAllTypesPokemon err", err));
   }, []);
 
-  const typeOfPokemons = [
-    "normal",
-    "fire",
-    "water",
-    "grass",
-    "flying",
-    "fighting",
-    "poison",
-    "electric",
-    "ground",
-    "rock",
-    "psychic",
-    "ice",
-    "bug",
-    "ghost",
-    "steel",
-    "dragon",
-    "fairy",
-    "dark",
-  ];
-
   const detectTypePokemon = (type) => {
-    if (typeOfPokemons.includes(type)) {
+    if (listTypesOfPokemons.includes(type)) {
       return `PokemonCard Type${type[0].toUpperCase() + type.slice(1)}`;
     }
     return "PokemonCard";
   };
 
-  return pokemon ? (
-    <div className={`${detectTypePokemon(typesPokemon)}`}>
-      <Link to={`/pokemon/${pokemon.name}`}>
+  const addPokemonToCompare = (pokemonName) => {
+    if (comparePokemons.length < 2) {
+      dispatch(setComparePokemons(pokemonName));
+    }
+  };
+
+  return (
+    <div className={`${detectTypePokemon(species[0].type.name)}`}>
+      <button onClick={() => addPokemonToCompare(name)}>
+        Compare with another
+      </button>
+      <Link to={`/pokemon/${name}`}>
         <div className="PokemonCard__image">
-          <img src={pokemon.sprites?.front_default} alt="" />
+          <img src={sprites?.front_default} alt="" />
         </div>
         <h3 className="PokemonCard__name">{name}</h3>
         <ul className="PokemonCard__description">
-          {pokemon.types?.map((type) => (
+          {species?.map((type) => (
             <li key={type?.type.name}>{type?.type.name}</li>
           ))}
         </ul>
       </Link>
     </div>
-  ) : (
-    <p>loading</p>
   );
 };
 

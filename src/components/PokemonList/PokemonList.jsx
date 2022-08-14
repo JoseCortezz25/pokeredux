@@ -7,7 +7,12 @@ const PokemonList = ({ pokemons }) => {
     <section className="PokemonList">
       {pokemons ? (
         pokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.name} name={pokemon.name} />
+          <PokemonCard
+            key={pokemon.name}
+            name={pokemon.name}
+            sprites={pokemon.sprites}
+            species={pokemon.types}
+          />
         ))
       ) : (
         <p>loading</p>
