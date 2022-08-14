@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { getAllTypesPokemon } from "../../service/fetchData";
 import { Link } from "react-router-dom";
 import "./PokemonCard.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setComparePokemons } from "../../actions";
 
 const PokemonCard = ({ name, sprites, species }) => {
   const [listTypesOfPokemons, setListTypesOfPokemons] = useState([]);
+  const comparePokemons = useSelector((state) => state.comparePokemons);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAllTypesPokemon()
       .then((data) => {
-        setListTypesOfPokemons(data.map(specie => specie.name));
+        setListTypesOfPokemons(data.map((specie) => specie.name));
       })
       .catch((err) => console.log("getAllTypesPokemon err", err));
   }, []);
@@ -21,8 +25,17 @@ const PokemonCard = ({ name, sprites, species }) => {
     return "PokemonCard";
   };
 
+  const addPokemonToCompare = (pokemonName) => {
+    if (comparePokemons.length < 2) {
+      dispatch(setComparePokemons(pokemonName));
+    }
+  };
+
   return (
     <div className={`${detectTypePokemon(species[0].type.name)}`}>
+      <button onClick={() => addPokemonToCompare(name)}>
+        Compare with another
+      </button>
       <Link to={`/pokemon/${name}`}>
         <div className="PokemonCard__image">
           <img src={sprites?.front_default} alt="" />

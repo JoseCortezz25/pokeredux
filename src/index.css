@@ -11,6 +11,9 @@
   --background-gray-color: #F3F6FC;
   --dark-gray-color: #82909F;
   --white-color: #FFFFFF;
+
+  --dark-color: #17191A;
+  --dark-light-color: #1B1D1E;
 }
 
 body {
