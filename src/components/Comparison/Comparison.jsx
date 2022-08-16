@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import "./Comparison.css";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getPokemon } from "../../service/fetchData";
+import { cleanComparePokemons } from "../../actions";
+import "./Comparison.css";
+
 const Comparison = () => {
-  const comparePokemons = useSelector((state) => state.comparePokemons);
+  const comparePokemons = useSelector(state => state.comparePokemons);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [pokemon1, setPokemon1] = useState({});
   const [pokemon2, setPokemon2] = useState({});
 
@@ -53,12 +56,18 @@ const Comparison = () => {
     return "AboutPokemon";
   };
 
+  const cleanPokemons = () => {
+    dispatch(cleanComparePokemons());
+    navigate("/");
+  }
+
   if (!pokemon1 && !pokemon2) { 
     return <p>Loading</p>
   }
 
   return comparePokemons.length === 2 ? (
     <section className="Comparison">
+      <button onClick={cleanPokemons}>CLEAN</button>
       <div className="ComparisonPokemon">
         <div className="ComparisonPokemon__images">
           <div className="PokemonImage">

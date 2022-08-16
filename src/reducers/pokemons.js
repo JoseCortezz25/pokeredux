@@ -13,9 +13,6 @@ const initialState = {
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
-
-  console.log('action', action);
-
   switch (action.type) {
     case SET_POKEMONS:
       return {

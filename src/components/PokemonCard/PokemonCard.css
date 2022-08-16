@@ -5,6 +5,28 @@
   border-radius: 30px;
 }
 
+.btnCompareCard {
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  border: none;
+  /* border: 1px solid red; */
+  padding: 5px;
+  margin-top: 15px;
+  margin-left: 15px;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+.btnCompareCard:hover {
+  background-color: aliceblue;
+}
+
+.btnCompareCard img {
+  width: 100%;
+  height: 100%;
+}
+
 .PokemonCard__image {
   width: 100%;
   max-height: 120px;

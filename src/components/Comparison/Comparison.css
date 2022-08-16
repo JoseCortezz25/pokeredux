@@ -5,6 +5,10 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.Comparison button {
+  position: absolute;
+}
+
 .ComparisonPokemon h1 {
   text-align: center;
   font-family: "Mouse Memoirs", sans-serif;
