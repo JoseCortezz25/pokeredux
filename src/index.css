@@ -64,6 +64,10 @@ a {
 }
 
 .TypeFighting {
+  background-color: rgba(211, 84, 0, 0.829);
+}
+
+.TypeFighting .PokemonCard__description li {
   background-color: #d35400;
 }
 
@@ -93,7 +97,7 @@ a {
 
 
 .TypeRock {
-  background-color: rgba(62, 39, 35, .6);
+  background-color: rgba(62, 39, 35, 0.801);
 }
 
 .TypeRock .PokemonCard__description li {
@@ -101,11 +105,19 @@ a {
 }
 
 .TypePsychic {
+  background-color: rgba(248, 88, 136, 0.795);
+}
+
+.TypePsychic .PokemonCard__description li {
   background-color: #f85888;
 }
 
 .TypeIce {
-  background-color: #67e8f9;
+  background-color: #67e8f9dc;
+}
+
+.TypeIce .PokemonCard__description li {
+  background-color: #1dc8df;
 }
 
 .TypeBug {
@@ -117,6 +129,10 @@ a {
 }
 
 .TypeGhost {
+  background-color: #4d1d95d0;
+}
+
+.TypeGhost .PokemonCard__description li {
   background-color: #4c1d95;
 }
 
@@ -125,6 +141,10 @@ a {
 }
 
 .TypeDragon {
+  background-color: rgba(8, 144, 178, 0.74);
+}
+
+.TypeDragon .PokemonCard__description li {
   background-color: #0891b2;
 }
 

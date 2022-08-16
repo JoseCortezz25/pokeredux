@@ -1,4 +1,10 @@
-import { SET_POKEMONS, SET_POKEMONS_WITH_DETAILS, SET_COMPARE_POKEMONS } from "./types";
+import { 
+  SET_POKEMONS, 
+  SET_POKEMONS_WITH_DETAILS, 
+  SET_COMPARE_POKEMONS, 
+  CLEAN_COMPARE_POKEMONS,
+  DELETE_POKEMON_FROM_COMPARE
+} from "./types";
 
 export const setPokemons = (payload) => {
   return {
@@ -19,4 +25,17 @@ export const setComparePokemons = (payload) => {
     type: SET_COMPARE_POKEMONS,
     payload,
   };
+}
+
+export const cleanComparePokemons = () => {
+  return {
+    type: CLEAN_COMPARE_POKEMONS,
+  };
+}
+
+export const deletePokemonFromCompare = (payload) => {
+  return {
+    type: DELETE_POKEMON_FROM_COMPARE,
+    payload
+  }
 }
