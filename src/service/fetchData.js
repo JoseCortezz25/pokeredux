@@ -14,34 +14,15 @@ export const getAllPokemons = (limit = 151) => {
     .catch(error => console.log(error));
 }
 
-export const getPokemonByPage = (path) => {
-  return axios.get(path)
-    .then(response => {
-      console.log(response.data.next);
-      return {
-        results: response.data.results,
-        previous: response.data.previous || null,
-        next: response.data.next
-      };
-    })
-    .catch(error => console.log(error));
-}
-
 export const getPokemon = (name) => {
   return axios.get(`${API}/pokemon/${name}`)
     .then(response => response.data)
     .catch(error => console.log(error));
 }
 
-export const getPokemonByUrl = (pokemon) => {
+export const getPokemonDetails = (pokemon) => {
   return axios.get(pokemon.url)
     .then(response => response.data)
-    .catch(error => console.log(error));
-}
-
-export const getLocationAreas = () => {
-  return axios.get(`${API}/location-area`)
-    .then(response => response.data.results)
     .catch(error => console.log(error));
 }
 

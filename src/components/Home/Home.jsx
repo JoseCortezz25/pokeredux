@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import {
-  getLocationAreas,
   getAllTypesPokemon,
   getAllPokemons,
-  getPokemonByUrl,
+  getPokemonDetails,
 } from "../../service/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setPokemons } from "../../actions";
+import Loader from "../Loader/Loader";
 import PokemonList from "../PokemonList/PokemonList";
 import Search from "../Search/Search";
 import "./Home.css";
@@ -15,7 +15,6 @@ const Home = () => {
   const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
 
-  const [locations, setLocations] = useState();
   const [pokemonSearched, setPokemonSearched] = useState(pokemons);
   const [typeOfPokemons, setTypeOfPokemons] = useState([]);
 
@@ -27,10 +26,6 @@ const Home = () => {
       setPokemonSearched(pokemons);
     }
     setPokemonSearched(filteredPokemons);
-  };
-
-  const filterByLocation = (event) => {
-    console.log("value", event);
   };
 
   const filterBySpecie = (event) => {
@@ -56,22 +51,16 @@ const Home = () => {
       try {
         const { results } = await getAllPokemons();
         const pokemonDetailed = await Promise.all(
-          results.map((pokemon) => getPokemonByUrl(pokemon))
-        );
-        console.log("pokemonDetailed", pokemonDetailed);
-        dispatch(setPokemons(pokemonDetailed));
-        setPokemonSearched(pokemonDetailed);
-      } catch (error) {
+          results.map((pokemon) => getPokemonDetails(pokemon))
+          );
+          
+          dispatch(setPokemons(pokemonDetailed));
+          setPokemonSearched(pokemonDetailed);
+        } catch (error) {
         console.error(error);
       }
     };
     fetchPokemons();
-
-    getLocationAreas()
-      .then((data) => {
-        setLocations(data.map((location) => location.name));
-      })
-      .catch((error) => console.log(error));
 
     getAllTypesPokemon()
       .then((data) => {
@@ -84,35 +73,20 @@ const Home = () => {
     <div className="Home">
       <div className="Home__filters">
         <Search setSearch={searchPokemon} />
-        <div>
-          <form onSubmit={filterByLocation}>
-            <select>
-              <option disabled>Choose an option</option>
-              {locations?.map((location) => (
-                <option value={location}>
-                  {location.replaceAll("-", " ")}
-                </option>
-              ))}
-            </select>
-          </form>
-
-          <form onSubmit={filterBySpecie}>
-            <select onChange={filterBySpecie}>
-              <option disabled>Choose an Specie</option>
-              <option value="all">💂 All species</option>
-              {typeOfPokemons?.map((specie) => (
-                <option value={specie}>{specie.replaceAll("-", " ")}</option>
-              ))}
-            </select>
-          </form>
-
-          <button>🎟 Color</button>
-        </div>
+        <select onChange={filterBySpecie}>
+          <option disabled>Choose an Specie</option>
+          <option value="all">💂 All species</option>
+          {typeOfPokemons?.map((specie) => (
+            <option value={specie}>{specie.replaceAll("-", " ")}</option>
+          ))}
+        </select>
       </div>
-      {pokemonSearched ? (
+      {pokemonSearched.length > 0 ? (
         <PokemonList pokemons={pokemonSearched} />
       ) : (
-        <p>loading</p>
+        <div className="Loader">
+          <Loader />
+        </div>
       )}
     </div>
   );

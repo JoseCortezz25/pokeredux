@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemon } from "../../service/fetchData";
-import { cleanComparePokemons } from "../../actions";
 import "./Comparison.css";
+import Loader from "../Loader/Loader";
 
 const Comparison = () => {
   const comparePokemons = useSelector(state => state.comparePokemons);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [pokemon1, setPokemon1] = useState({});
-  const [pokemon2, setPokemon2] = useState({});
+  const [pokemon2, setPokemon2] = useState({}); 
 
   useEffect(() => {
     const getInfoPokemons = async () => {
@@ -28,46 +26,12 @@ const Comparison = () => {
     getInfoPokemons();
   }, []);
 
-  const typeOfPokemons = [
-    "normal",
-    "fire",
-    "water",
-    "grass",
-    "flying",
-    "fighting",
-    "poison",
-    "electric",
-    "ground",
-    "rock",
-    "psychic",
-    "ice",
-    "bug",
-    "ghost",
-    "steel",
-    "dragon",
-    "fairy",
-    "dark",
-  ];
-
-  const detectTypePokemon = (type) => {
-    if (typeOfPokemons.includes(type)) {
-      return `AboutPokemon Type${type[0].toUpperCase() + type.slice(1)}`;
-    }
-    return "AboutPokemon";
-  };
-
-  const cleanPokemons = () => {
-    dispatch(cleanComparePokemons());
-    navigate("/");
-  }
-
   if (!pokemon1 && !pokemon2) { 
-    return <p>Loading</p>
+    return <Loader />
   }
 
   return comparePokemons.length === 2 ? (
     <section className="Comparison">
-      <button onClick={cleanPokemons}>CLEAN</button>
       <div className="ComparisonPokemon">
         <div className="ComparisonPokemon__images">
           <div className="PokemonImage">
